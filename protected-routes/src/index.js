@@ -1,28 +1,21 @@
-import React from "react";
+import React,{useReducer} from "react";
 import ReactDOM from "react-dom";
-import { LandingPage } from "./landing.page";
-import { AppLayout } from "./app.layout";
-import ProtectedRoute from "./protected-route";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import "./styles.css";
+import {BrowserRouter} from 'react-router-dom';
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from 'react-redux';
+import store from "./store";
+import { createStore } from "redux";
 
-function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route exact path="/" component={LandingPage} />
-        {/* <ProtectedRoute  path="/app" component={AppLayout} /> */}
-        <ProtectedRoute exact path='/app' component={AppLayout} />
-        <Route path="*" component={() => "404 NOT FOUND"} />
-      </Routes>
-    </div>
-  );
-}
 
-const rootElement = document.getElementById("root");
+
 ReactDOM.render(
-  <Router>
+  <BrowserRouter>
+  <Provider store={store}>
     <App />
-  </Router>,
-  rootElement
+</Provider>
+  </BrowserRouter>,
+  document.getElementById("root")
 );
+reportWebVitals();
